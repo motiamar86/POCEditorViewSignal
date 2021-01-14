@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">POCEditorViewSignal</string>
+
+    <!-- Slide -->
+    <string name="Slide_image">Image</string>
+    <string name="Slide_sticker">Sticker</string>
+    <string name="Slide_audio">Audio</string>
+    <string name="Slide_video">Video</string>
+
+
+
+    <!-- conversation_input_panel -->
+    <string name="conversation_input_panel__slide_to_cancel">Slide to cancel</string>
+    <string name="conversation_input_panel__cancel">Cancel</string>
+
+    <!-- conversation_item -->
+    <string name="conversation_item__mms_image_description">Media message</string>
+    <string name="conversation_item__secure_message_description">Secure message</string>
+
+    <!-- conversation_item_sent -->
+    <string name="conversation_item_sent__send_failed_indicator_description">Send Failed</string>
+    <string name="conversation_item_sent__pending_approval_description">Pending Approval</string>
+    <string name="conversation_item_sent__delivered_description">Delivered</string>
+    <string name="conversation_item_sent__message_read">Message read</string>
+
+
+    <!-- ThumbnailView -->
+    <string name="ThumbnailView_Play_video_description">Play video</string>
+    <string name="ThumbnailView_Has_a_caption_description">Has a caption</string>
+
+</resources>
