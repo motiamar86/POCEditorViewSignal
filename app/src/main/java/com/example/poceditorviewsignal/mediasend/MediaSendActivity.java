@@ -34,8 +34,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
+import com.example.poceditorviewsignal.R;
+import com.example.poceditorviewsignal.Util;
+import com.example.poceditorviewsignal.mediapreview.MediaRailAdapter;
 
-import org.signal.core.util.logging.Log;
+/*import org.signal.core.util.logging.Log;
 import org.thoughtcrime.securesms.PassphraseRequiredActivity;
 import org.thoughtcrime.securesms.R;
 import org.thoughtcrime.securesms.TransportOption;
@@ -74,7 +77,7 @@ import org.thoughtcrime.securesms.util.concurrent.SimpleTask;
 import org.thoughtcrime.securesms.util.livedata.LiveDataUtil;
 import org.thoughtcrime.securesms.util.views.SimpleProgressDialog;
 import org.thoughtcrime.securesms.util.views.Stub;
-import org.thoughtcrime.securesms.video.VideoUtil;
+import org.thoughtcrime.securesms.video.VideoUtil;*/
 import org.whispersystems.libsignal.util.guava.Optional;
 
 import java.io.FileDescriptor;
@@ -146,7 +149,7 @@ public class MediaSendActivity extends PassphraseRequiredActivity implements Med
   private Stub<View>          mentionSuggestions;
   private TextView            charactersLeft;
   private RecyclerView mediaRail;
-  private MediaRailAdapter    mediaRailAdapter;
+  private MediaRailAdapter mediaRailAdapter;
 
   private int visibleHeight;
 

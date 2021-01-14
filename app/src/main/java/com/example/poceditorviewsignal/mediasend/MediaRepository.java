@@ -17,14 +17,17 @@ import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
 import com.annimon.stream.Stream;
+import com.example.poceditorviewsignal.MediaUtil;
+import com.example.poceditorviewsignal.R;
+import com.example.poceditorviewsignal.mms.PartAuthority;
 
-import org.signal.core.util.concurrent.SignalExecutors;
+/*import org.signal.core.util.concurrent.SignalExecutors;
 import org.signal.core.util.logging.Log;
 import org.thoughtcrime.securesms.R;
 import org.thoughtcrime.securesms.mms.PartAuthority;
 import org.thoughtcrime.securesms.util.MediaUtil;
 import org.thoughtcrime.securesms.util.StorageUtil;
-import org.thoughtcrime.securesms.util.Util;
+import org.thoughtcrime.securesms.util.Util;*/
 import org.whispersystems.libsignal.util.guava.Optional;
 
 import java.io.IOException;
@@ -41,33 +44,33 @@ import java.util.Map;
  */
 public class MediaRepository {
 
-  private static final String TAG    = Log.tag(MediaRepository.class);
+  private static final String TAG    = "MediaRepository";
   private static final String CAMERA = "Camera";
 
   /**
    * Retrieves a list of folders that contain media.
    */
   void getFolders(@NonNull Context context, @NonNull Callback<List<MediaFolder>> callback) {
-    if (!StorageUtil.canReadFromMediaStore()) {
+   /* if (!StorageUtil.canReadFromMediaStore()) {
       Log.w(TAG, "No storage permissions!", new Throwable());
       callback.onComplete(Collections.emptyList());
       return;
     }
 
-    SignalExecutors.BOUNDED.execute(() -> callback.onComplete(getFolders(context)));
+    SignalExecutors.BOUNDED.execute(() -> callback.onComplete(getFolders(context)));*/
   }
 
   /**
    * Retrieves a list of media items (images and videos) that are present int he specified bucket.
    */
   public void getMediaInBucket(@NonNull Context context, @NonNull String bucketId, @NonNull Callback<List<Media>> callback) {
-    if (!StorageUtil.canReadFromMediaStore()) {
+   /* if (!StorageUtil.canReadFromMediaStore()) {
       Log.w(TAG, "No storage permissions!", new Throwable());
       callback.onComplete(Collections.emptyList());
       return;
     }
 
-    SignalExecutors.BOUNDED.execute(() -> callback.onComplete(getMediaInBucket(context, bucketId)));
+    SignalExecutors.BOUNDED.execute(() -> callback.onComplete(getMediaInBucket(context, bucketId)));*/
   }
 
   /**
@@ -80,24 +83,24 @@ public class MediaRepository {
       return;
     }
 
-    if (!StorageUtil.canReadFromMediaStore()) {
+   /* if (!StorageUtil.canReadFromMediaStore()) {
       Log.w(TAG, "No storage permissions!", new Throwable());
       callback.onComplete(media);
       return;
-    }
+    }*/
 
 
-    SignalExecutors.BOUNDED.execute(() -> callback.onComplete(getPopulatedMedia(context, media)));
+   // SignalExecutors.BOUNDED.execute(() -> callback.onComplete(getPopulatedMedia(context, media)));
   }
 
   void getMostRecentItem(@NonNull Context context, @NonNull Callback<Optional<Media>> callback) {
-    if (!StorageUtil.canReadFromMediaStore()) {
+    /*if (!StorageUtil.canReadFromMediaStore()) {
       Log.w(TAG, "No storage permissions!", new Throwable());
       callback.onComplete(Optional.absent());
       return;
     }
 
-    SignalExecutors.BOUNDED.execute(() -> callback.onComplete(getMostRecentItem(context)));
+    SignalExecutors.BOUNDED.execute(() -> callback.onComplete(getMostRecentItem(context)));*/
   }
 
   static void transformMedia(@NonNull Context context,
@@ -105,7 +108,7 @@ public class MediaRepository {
                              @NonNull Map<Media, MediaTransform> modelsToTransform,
                              @NonNull Callback<LinkedHashMap<Media, Media>> callback)
   {
-    SignalExecutors.BOUNDED.execute(() -> callback.onComplete(transformMedia(context, currentMedia, modelsToTransform)));
+   // SignalExecutors.BOUNDED.execute(() -> callback.onComplete(transformMedia(context, currentMedia, modelsToTransform)));
   }
 
   @WorkerThread
@@ -170,10 +173,10 @@ public class MediaRepository {
         String     bucketId  = cursor.getString(cursor.getColumnIndexOrThrow(projection[1]));
         String     title     = cursor.getString(cursor.getColumnIndexOrThrow(projection[2]));
         long       timestamp = cursor.getLong(cursor.getColumnIndexOrThrow(projection[3]));
-        FolderData folder    = Util.getOrDefault(folders, bucketId, new FolderData(thumbnail, localizeTitle(context, title), bucketId));
+    //    FolderData folder    = Util.getOrDefault(folders, bucketId, new FolderData(thumbnail, localizeTitle(context, title), bucketId));
 
-        folder.incrementCount();
-        folders.put(bucketId, folder);
+    /*    folder.incrementCount();
+        folders.put(bucketId, folder);*/
 
         if (cameraBucketId == null && CAMERA.equals(title)) {
           cameraBucketId = bucketId;
@@ -191,7 +194,7 @@ public class MediaRepository {
 
   private @NonNull String localizeTitle(@NonNull Context context, @NonNull String title) {
     if (CAMERA.equals(title)) {
-      return context.getString(R.string.MediaRepository__camera);
+      return context.getString(R.string.exo_media_action_repeat_all_description);
     } else {
       return title;
     }
@@ -242,7 +245,7 @@ public class MediaRepository {
         long   size        = cursor.getLong(cursor.getColumnIndexOrThrow(Images.Media.SIZE));
         long   duration    = !isImage ? cursor.getInt(cursor.getColumnIndexOrThrow(Video.Media.DURATION)) : 0;
 
-        media.add(new Media(uri, mimetype, date, width, height, size, duration, false, Optional.of(bucketId), Optional.absent(), Optional.absent()));
+        media.add(new Media(uri, mimetype, date, width, height, size, duration, false, Optional.of(bucketId), Optional.absent()));
       }
     }
 
@@ -332,7 +335,7 @@ public class MediaRepository {
       height = dimens.second;
     }
 
-    return new Media(media.getUri(), media.getMimeType(), media.getDate(), width, height, size, 0, media.isBorderless(), media.getBucketId(), media.getCaption(), Optional.absent());
+    return new Media(media.getUri(), media.getMimeType(), media.getDate(), width, height, size, 0, media.isBorderless(), media.getBucketId(), media.getCaption());
   }
 
   private Media getContentResolverPopulatedMedia(@NonNull Context context, @NonNull Media media) throws IOException {
@@ -358,7 +361,7 @@ public class MediaRepository {
       height = dimens.second;
     }
 
-    return new Media(media.getUri(), media.getMimeType(), media.getDate(), width, height, size, 0, media.isBorderless(), media.getBucketId(), media.getCaption(), Optional.absent());
+    return new Media(media.getUri(), media.getMimeType(), media.getDate(), width, height, size, 0, media.isBorderless(), media.getBucketId(), media.getCaption());
   }
 
   private static class FolderResult {

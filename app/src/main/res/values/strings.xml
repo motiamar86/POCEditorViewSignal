@@ -28,4 +28,6 @@
     <string name="ThumbnailView_Play_video_description">Play video</string>
     <string name="ThumbnailView_Has_a_caption_description">Has a caption</string>
 
+    <string name="MediaRepository_all_media">All media</string>
+
 </resources>

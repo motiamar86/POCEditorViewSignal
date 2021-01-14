@@ -11,11 +11,13 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.annimon.stream.Stream;
+import com.example.poceditorviewsignal.MediaConstraints;
+import com.example.poceditorviewsignal.MediaUtil;
 
-import org.thoughtcrime.securesms.dependencies.ApplicationDependencies;
+/*import org.thoughtcrime.securesms.dependencies.ApplicationDependencies;
 import org.thoughtcrime.securesms.mms.MediaConstraints;
 import org.thoughtcrime.securesms.scribbles.ImageEditorFragment;
-import org.thoughtcrime.securesms.util.MediaUtil;
+import org.thoughtcrime.securesms.util.MediaUtil;*/
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,7 +29,7 @@ class MediaSendFragmentPagerAdapter extends FragmentStatePagerAdapter {
   private final List<Media>                         media;
   private final Map<Integer, MediaSendPageFragment> fragments;
   private final Map<Uri, Object>                    savedState;
-  private final MediaConstraints                    mediaConstraints;
+  private final MediaConstraints mediaConstraints;
 
   MediaSendFragmentPagerAdapter(@NonNull FragmentManager fm, @NonNull MediaConstraints mediaConstraints) {
     super(fm);

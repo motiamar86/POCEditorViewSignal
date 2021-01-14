@@ -41,7 +41,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresPermission;
 
 import com.annimon.stream.Stream;
-import com.google.android.mms.pdu_alt.CharacterSets;
+/*import com.google.android.mms.pdu_alt.CharacterSets;
 import com.google.android.mms.pdu_alt.EncodedStringValue;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
@@ -51,7 +51,7 @@ import org.signal.core.util.LinkedBlockingLifoQueue;
 import org.signal.core.util.logging.Log;
 import org.thoughtcrime.securesms.components.ComposeText;
 import org.thoughtcrime.securesms.keyvalue.SignalStore;
-import org.thoughtcrime.securesms.mms.OutgoingLegacyMmsConnection;
+import org.thoughtcrime.securesms.mms.OutgoingLegacyMmsConnection;*/
 import org.whispersystems.libsignal.util.guava.Optional;
 
 import java.io.ByteArrayOutputStream;
@@ -71,7 +71,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class Util {
-  private static final String TAG = org.thoughtcrime.securesms.util.Util.class.getSimpleName();
+  private static final String TAG = "org.thoughtcrime.securesms.util.Util.class.getSimpleName()";
 
   private static final long BUILD_LIFESPAN = TimeUnit.DAYS.toMillis(90);
 
@@ -184,7 +184,7 @@ public class Util {
 
   public static String getFirstNonEmpty(String... values) {
     for (String value : values) {
-      if (!org.thoughtcrime.securesms.util.Util.isEmpty(value)) {
+      if (!isEmpty(value)) {
         return value;
       }
     }
@@ -400,9 +400,9 @@ public class Util {
    *         Takes into account both the build age as well as any remote deprecation values.
    */
   public static long getTimeUntilBuildExpiry() {
-    if (SignalStore.misc().isClientDeprecated()) {
+    /*if (SignalStore.misc().isClientDeprecated()) {
       return 0;
-    }
+    }*/
 
     long buildAge                   = System.currentTimeMillis() - BuildConfig.BUILD_TIMESTAMP;
     long timeUntilBuildDeprecation  = BUILD_LIFESPAN - buildAge;

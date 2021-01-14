@@ -5,4 +5,8 @@
 
     <dimen name="thumbnail_default_radius">4dp</dimen>
     <dimen name="message_corner_collapse_radius">4dp</dimen>
+
+    <dimen name="tooltip_popup_margin">8dp</dimen>
+
+    <dimen name="progress_dialog_size">120dp</dimen>
 </resources>

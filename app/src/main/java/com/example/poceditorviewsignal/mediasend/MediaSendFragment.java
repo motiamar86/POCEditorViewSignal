@@ -17,8 +17,10 @@ import org.thoughtcrime.securesms.components.ControllableViewPager;
 import org.thoughtcrime.securesms.mms.MediaConstraints;
 import org.thoughtcrime.securesms.util.Util;*/
 
+import com.example.poceditorviewsignal.MediaConstraints;
 import com.example.poceditorviewsignal.R;
 import com.example.poceditorviewsignal.Util;
+import com.example.poceditorviewsignal.views.ControllableViewPager;
 
 import java.util.List;
 import java.util.Map;
@@ -29,7 +31,7 @@ import java.util.Map;
 public class MediaSendFragment extends Fragment {
 
   private ViewGroup                     playbackControlsContainer;
-  private ControllableViewPager         fragmentPager;
+  private ControllableViewPager fragmentPager;
   private MediaSendFragmentPagerAdapter fragmentPagerAdapter;
 
   private MediaSendViewModel viewModel;
