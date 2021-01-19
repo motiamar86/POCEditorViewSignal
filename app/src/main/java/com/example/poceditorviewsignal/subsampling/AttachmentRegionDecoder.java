@@ -8,12 +8,14 @@ import android.graphics.BitmapRegionDecoder;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.net.Uri;
+import android.util.Log;
 
 import com.davemorrissey.labs.subscaleview.decoder.ImageRegionDecoder;
 import com.davemorrissey.labs.subscaleview.decoder.SkiaImageRegionDecoder;
-
+import com.example.poceditorviewsignal.mms.PartAuthority;
+/*
 import org.signal.core.util.logging.Log;
-import org.thoughtcrime.securesms.mms.PartAuthority;
+import org.thoughtcrime.securesms.mms.PartAuthority;*/
 
 import java.io.InputStream;
 

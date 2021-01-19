@@ -173,7 +173,7 @@ public final class ImageEditorFragment extends Fragment implements ImageEditorHu
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
 
-    boolean isAvatarMode = requireArguments().getBoolean(KEY_IS_AVATAR_MODE, false);
+    boolean isAvatarMode = false;//requireArguments().getBoolean(KEY_IS_AVATAR_MODE, false);
 
     imageEditorHud  = view.findViewById(R.id.scribble_hud);
     imageEditorView = view.findViewById(R.id.image_editor_view);
@@ -193,7 +193,7 @@ public final class ImageEditorFragment extends Fragment implements ImageEditorHu
 
     if (editorModel == null) {
       editorModel = isAvatarMode ? EditorModel.createForCircleEditing() : EditorModel.create();
-      EditorElement image = new EditorElement(new UriGlideRenderer(imageUri, true, imageMaxWidth, imageMaxHeight));
+      EditorElement image = new EditorElement(new UriGlideRenderer(imageUri, false, imageMaxWidth, imageMaxHeight));
       image.getFlags().setSelectable(false).persist();
       editorModel.addElement(image);
     }

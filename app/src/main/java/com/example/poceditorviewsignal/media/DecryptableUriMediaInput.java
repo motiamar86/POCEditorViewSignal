@@ -43,7 +43,7 @@ public final class DecryptableUriMediaInput {
                                                      .mediaDataSourceFor(partId);*/
 
     //TODO implementation of device URI.
-    MediaInput md = new MediaInput.UriMediaInput(context, Uri.parse("URI"));
+    MediaInput md = new MediaInput.UriMediaInput(context, uri);
 
 
     /*  if (mediaDataSource == null) {

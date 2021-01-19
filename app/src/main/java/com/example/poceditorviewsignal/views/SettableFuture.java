@@ -74,12 +74,12 @@ public class SettableFuture<T> implements ListenableFuture<T> {
     other.addListener(new Listener<T>() {
       @Override
       public void onSuccess(T result) {
-        org.thoughtcrime.securesms.util.concurrent.SettableFuture.this.set(result);
+        SettableFuture.this.set(result);
       }
 
       @Override
       public void onFailure(ExecutionException e) {
-        org.thoughtcrime.securesms.util.concurrent.SettableFuture.this.setException(e.getCause());
+        SettableFuture.this.setException(e.getCause());
       }
     });
   }

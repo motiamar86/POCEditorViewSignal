@@ -5,7 +5,6 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.WorkerThread;
 
-import org.thoughtcrime.securesms.database.AttachmentDatabase;
 import org.whispersystems.libsignal.util.guava.Optional;
 
 public final class VideoTrimTransform implements MediaTransform {
@@ -28,7 +27,7 @@ public final class VideoTrimTransform implements MediaTransform {
                      media.getDuration(),
                      media.isBorderless(),
                      media.getBucketId(),
-                     media.getCaption(),
-                     Optional.of(new AttachmentDatabase.TransformProperties(false, data.durationEdited, data.startTimeUs, data.endTimeUs)));
+                     media.getCaption()
+                     );
   }
 }

@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.net.Uri;
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,8 +14,11 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.android.mms.transaction.MessageSender;
 import com.annimon.stream.Stream;
-
+import com.example.poceditorviewsignal.MediaConstraints;
+import com.example.poceditorviewsignal.MediaUtil;
+/*
 import org.signal.core.util.logging.Log;
 import org.thoughtcrime.securesms.TransportOption;
 import org.thoughtcrime.securesms.database.ThreadDatabase;
@@ -32,7 +36,7 @@ import org.thoughtcrime.securesms.util.MediaUtil;
 import org.thoughtcrime.securesms.util.MessageUtil;
 import org.thoughtcrime.securesms.util.SingleLiveEvent;
 import org.thoughtcrime.securesms.util.TextSecurePreferences;
-import org.thoughtcrime.securesms.util.Util;
+import org.thoughtcrime.securesms.util.Util;*/
 import org.whispersystems.libsignal.util.guava.Optional;
 import org.whispersystems.libsignal.util.guava.Preconditions;
 
@@ -46,7 +50,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * Manages the observable datasets available in {@link MediaSendActivity}.
+
  */
 class MediaSendViewModel extends ViewModel {
 
@@ -54,7 +58,7 @@ class MediaSendViewModel extends ViewModel {
 
   private final Application                        application;
   private final MediaRepository                    repository;
-  private final MediaUploadRepository              uploadRepository;
+  //private final MediaUploadRepository              uploadRepository;
   private final MutableLiveData<List<Media>> selectedMedia;
   private final MutableLiveData<List<Media>> bucketMedia;
   private final MutableLiveData<Optional<Media>> mostRecentMedia;
@@ -62,11 +66,11 @@ class MediaSendViewModel extends ViewModel {
   private final MutableLiveData<String> bucketId;
   private final MutableLiveData<List<MediaFolder>> folders;
   private final MutableLiveData<HudState> hudState;
-  private final SingleLiveEvent<Error>             error;
-  private final SingleLiveEvent<Event>             event;
+ // private final SingleLiveEvent<Error>             error;
+ // private final SingleLiveEvent<Event>             event;
   private final Map<Uri, Object>                   savedDrawState;
 
-  private TransportOption  transport;
+ // private TransportOption  transport;
   private MediaConstraints mediaConstraints;
   private CharSequence     body;
   private boolean          sentMedia;
@@ -85,15 +89,15 @@ class MediaSendViewModel extends ViewModel {
   private ViewOnceState viewOnceState;
 
 
-  private @Nullable Recipient recipient;
+ // private @Nullable Recipient recipient;
 
   private MediaSendViewModel(@NonNull Application application,
-                             @NonNull MediaRepository repository,
-                             @NonNull MediaUploadRepository uploadRepository)
+                             @NonNull MediaRepository repository/*,
+                             @NonNull MediaUploadRepository uploadRepository*/)
   {
     this.application       = application;
     this.repository        = repository;
-    this.uploadRepository  = uploadRepository;
+   // this.uploadRepository  = uploadRepository;
     this.selectedMedia     = new MutableLiveData<>();
     this.bucketMedia       = new MutableLiveData<>();
     this.mostRecentMedia   = new MutableLiveData<>();
@@ -101,8 +105,8 @@ class MediaSendViewModel extends ViewModel {
     this.bucketId          = new MutableLiveData<>();
     this.folders           = new MutableLiveData<>();
     this.hudState          = new MutableLiveData<>();
-    this.error             = new SingleLiveEvent<>();
-    this.event             = new SingleLiveEvent<>();
+//    this.error             = new SingleLiveEvent<>();
+  //  this.event             = new SingleLiveEvent<>();
     this.savedDrawState    = new HashMap<>();
     this.lastCameraCapture = Optional.absent();
     this.body              = "";
@@ -115,7 +119,7 @@ class MediaSendViewModel extends ViewModel {
     position.setValue(-1);
   }
 
-  void setTransport(@NonNull TransportOption transport) {
+  /*void setTransport(@NonNull TransportOption transport) {
     this.transport = transport;
 
     if (transport.isSms()) {
@@ -134,9 +138,9 @@ class MediaSendViewModel extends ViewModel {
   void setRecipient(@Nullable Recipient recipient) {
     this.recipient        = recipient;
     this.preUploadEnabled = shouldPreUpload(application, meteredConnection, isSms, recipient);
-  }
+  }*/
 
-  void onSelectedMediaChanged(@NonNull Context context, @NonNull List<Media> newMedia) {
+/*  void onSelectedMediaChanged(@NonNull Context context, @NonNull List<Media> newMedia) {
     List<Media> originalMedia = getSelectedMediaOrDefault();
 
     if (!newMedia.isEmpty()) {
@@ -190,9 +194,9 @@ class MediaSendViewModel extends ViewModel {
         updateAttachmentUploads(originalMedia, getSelectedMediaOrDefault());
       });
     });
-  }
+  }*/
 
-  void onSingleMediaSelected(@NonNull Context context, @NonNull Media media) {
+/*  void onSingleMediaSelected(@NonNull Context context, @NonNull Media media) {
     selectedMedia.setValue(Collections.singletonList(media));
 
     repository.getPopulatedMedia(context, Collections.singletonList(media), populatedMedia -> {
@@ -209,7 +213,7 @@ class MediaSendViewModel extends ViewModel {
         selectedMedia.setValue(filteredMedia);
       });
     });
-  }
+  }*/
 
   void onMultiSelectStarted() {
     hudVisible     = true;
@@ -226,7 +230,7 @@ class MediaSendViewModel extends ViewModel {
     page           = Page.EDITOR;
     hudVisible     = true;
     captionVisible = getSelectedMediaOrDefault().size() > 1 || (getSelectedMediaOrDefault().size() > 0 && getSelectedMediaOrDefault().get(0).getCaption().isPresent());
-    buttonState    = (recipient != null) ? ButtonState.SEND : ButtonState.CONTINUE;
+   // buttonState    = (recipient != null) ? ButtonState.SEND : ButtonState.CONTINUE;
 
     if (viewOnceState == ViewOnceState.GONE && viewOnceSupported()) {
       viewOnceState = ViewOnceState.DISABLED;
@@ -241,7 +245,7 @@ class MediaSendViewModel extends ViewModel {
     hudState.setValue(buildHudState());
   }
 
-  void onCameraStarted() {
+  /*void onCameraStarted() {
     // TODO: Don't need this?
     Page previous = page;
 
@@ -260,7 +264,7 @@ class MediaSendViewModel extends ViewModel {
     }
 
     hudState.setValue(buildHudState());
-  }
+  }*/
 
   void onItemPickerStarted() {
     page           = Page.ITEM_PICKER;
@@ -304,7 +308,7 @@ class MediaSendViewModel extends ViewModel {
     captionVisible = false;
 
     List<Media> uncaptioned = Stream.of(getSelectedMediaOrDefault())
-                                    .map(m -> new Media(m.getUri(), m.getMimeType(), m.getDate(), m.getWidth(), m.getHeight(), m.getSize(), m.getDuration(), m.isBorderless(), m.getBucketId(), Optional.absent(), Optional.absent()))
+                                    .map(m -> new Media(m.getUri(), m.getMimeType(), m.getDate(), m.getWidth(), m.getHeight(), m.getSize(), m.getDuration(), m.isBorderless(), m.getBucketId(), Optional.absent()))
                                     .toList();
 
     selectedMedia.setValue(uncaptioned);
@@ -316,7 +320,7 @@ class MediaSendViewModel extends ViewModel {
     if (page != Page.EDITOR) return;
 
     composeVisible = (viewOnceState != ViewOnceState.ENABLED);
-    buttonState    = (recipient != null) ? ButtonState.SEND : ButtonState.CONTINUE;
+   // buttonState    = (recipient != null) ? ButtonState.SEND : ButtonState.CONTINUE;
 
     if (isSms) {
       railState      = RailState.GONE;
@@ -339,7 +343,7 @@ class MediaSendViewModel extends ViewModel {
       railState      = RailState.GONE;
       composeVisible = (viewOnceState == ViewOnceState.GONE);
       captionVisible = false;
-      buttonState    = (recipient != null) ? ButtonState.SEND : ButtonState.CONTINUE;
+     // buttonState    = (recipient != null) ? ButtonState.SEND : ButtonState.CONTINUE;
     } else {
       if (isCaptionFocused) {
         railState      = viewOnceState != ViewOnceState.ENABLED ? RailState.INTERACTIVE : RailState.GONE;
@@ -350,7 +354,7 @@ class MediaSendViewModel extends ViewModel {
         railState      = viewOnceState != ViewOnceState.ENABLED ? RailState.INTERACTIVE : RailState.GONE;
         composeVisible = (viewOnceState != ViewOnceState.ENABLED);
         captionVisible = false;
-        buttonState    = (recipient != null) ? ButtonState.SEND : ButtonState.CONTINUE;
+     //   buttonState    = (recipient != null) ? ButtonState.SEND : ButtonState.CONTINUE;
       }
     }
 
@@ -368,16 +372,14 @@ class MediaSendViewModel extends ViewModel {
 
   void onPageChanged(int position) {
     if (position < 0 || position >= getSelectedMediaOrDefault().size()) {
-      Log.w(TAG, "Tried to move to an out-of-bounds item. Size: " + getSelectedMediaOrDefault().size() + ", position: " + position);
       return;
     }
 
     this.position.setValue(position);
   }
 
-  void onMediaItemRemoved(@NonNull Context context, int position) {
+ /* void onMediaItemRemoved(@NonNull Context context, int position) {
     if (position < 0 || position >= getSelectedMediaOrDefault().size()) {
-      Log.w(TAG, "Tried to remove an out-of-bounds item. Size: " + getSelectedMediaOrDefault().size() + ", position: " + position);
       return;
     }
 
@@ -404,11 +406,11 @@ class MediaSendViewModel extends ViewModel {
     }
 
     hudState.setValue(buildHudState());
-  }
+  }*/
 
-  void onVideoBeginEdit(@NonNull Uri uri) {
+ /* void onVideoBeginEdit(@NonNull Uri uri) {
     cancelUpload(new Media(uri, "", 0, 0, 0, 0, 0, false, Optional.absent(), Optional.absent(), Optional.absent()));
-  }
+  }*/
 
   void onMediaCaptured(@NonNull Media media) {
     lastCameraCapture = Optional.of(media);
@@ -420,7 +422,7 @@ class MediaSendViewModel extends ViewModel {
     }
 
     if (selected.size() >= maxSelection) {
-      error.setValue(Error.TOO_MANY_ITEMS);
+     // error.setValue(Error.TOO_MANY_ITEMS);
       return;
     }
 
@@ -432,11 +434,11 @@ class MediaSendViewModel extends ViewModel {
     startUpload(media);
   }
 
-  void onCaptionChanged(@NonNull String newCaption) {
+/*  void onCaptionChanged(@NonNull String newCaption) {
     if (position.getValue() >= 0 && !Util.isEmpty(selectedMedia.getValue())) {
       selectedMedia.getValue().get(position.getValue()).setCaption(TextUtils.isEmpty(newCaption) ? null : newCaption);
     }
-  }
+  }*/
 
   void onCameraControlsInitialized() {
     repository.getMostRecentItem(application, mostRecentMedia::postValue);
@@ -446,7 +448,7 @@ class MediaSendViewModel extends ViewModel {
     Log.i(TAG, "Metered connectivity status set to: " + metered);
 
     meteredConnection = metered;
-    preUploadEnabled  = shouldPreUpload(application, metered, isSms, recipient);
+   // preUploadEnabled  = shouldPreUpload(application, metered, isSms, recipient);
   }
 
   void saveDrawState(@NonNull Map<Uri, Object> state) {
@@ -454,7 +456,7 @@ class MediaSendViewModel extends ViewModel {
     savedDrawState.putAll(state);
   }
 
-  @NonNull
+  /*@NonNull
   LiveData<MediaSendActivityResult> onSendClicked(Map<Media, MediaTransform> modelsToTransform, @NonNull List<Recipient> recipients, @NonNull List<Mention> mentions) {
     if (isSms && recipients.size() > 0) {
       throw new IllegalStateException("Provided recipients to send to, but this is SMS!");
@@ -504,7 +506,7 @@ class MediaSendViewModel extends ViewModel {
     sentMedia = true;
 
     return result;
-  }
+  }*/
 
   @NonNull Map<Uri, Object> getDrawState() {
     return savedDrawState;
@@ -546,7 +548,7 @@ class MediaSendViewModel extends ViewModel {
     return bucketId;
   }
 
-  @NonNull
+/*  @NonNull
   LiveData<Error> getError() {
     return error;
   }
@@ -554,7 +556,7 @@ class MediaSendViewModel extends ViewModel {
   @NonNull
   LiveData<Event> getEvents() {
     return event;
-  }
+  }*/
 
   @NonNull
   LiveData<HudState> getHudState() {
@@ -578,7 +580,7 @@ class MediaSendViewModel extends ViewModel {
                                             : selectedMedia.getValue();
   }
 
-  private @NonNull List<Media> getFilteredMedia(@NonNull Context context, @NonNull List<Media> media, @NonNull MediaConstraints mediaConstraints) {
+/*  private @NonNull List<Media> getFilteredMedia(@NonNull Context context, @NonNull List<Media> media, @NonNull MediaConstraints mediaConstraints) {
     return Stream.of(media).filter(m -> MediaUtil.isGif(m.getMimeType())       ||
                                         MediaUtil.isImageType(m.getMimeType()) ||
                                         MediaUtil.isVideoType(m.getMimeType()))
@@ -588,7 +590,7 @@ class MediaSendViewModel extends ViewModel {
                                     (MediaUtil.isVideoType(m.getMimeType()) && m.getSize() < mediaConstraints.getUncompressedVideoMaxSize(context));
                            }).toList();
 
-  }
+  }*/
 
   private HudState buildHudState() {
     List<Media>   selectedMedia         = getSelectedMediaOrDefault();
@@ -600,14 +602,14 @@ class MediaSendViewModel extends ViewModel {
   }
 
   private void clearPersistedMedia() {
-    Stream.of(getSelectedMediaOrDefault())
+   /* Stream.of(getSelectedMediaOrDefault())
           .map(Media::getUri)
           .filter(BlobProvider::isAuthority)
-          .forEach(uri -> BlobProvider.getInstance().delete(application.getApplicationContext(), uri));
+          .forEach(uri -> BlobProvider.getInstance().delete(application.getApplicationContext(), uri));*/
   }
 
   private boolean viewOnceSupported() {
-    return !isSms && (recipient == null || !recipient.isSelf()) && mediaSupportsRevealableMessage(getSelectedMediaOrDefault());
+    return !isSms /*&& (recipient == null || !recipient.isSelf())*/ && mediaSupportsRevealableMessage(getSelectedMediaOrDefault());
   }
 
   private boolean mediaSupportsRevealableMessage(@NonNull List<Media> media) {
@@ -616,30 +618,30 @@ class MediaSendViewModel extends ViewModel {
   }
 
   private void showViewOnceTooltipIfNecessary(@NonNull ViewOnceState viewOnceState) {
-    if (viewOnceState == ViewOnceState.DISABLED && !TextSecurePreferences.hasSeenViewOnceTooltip(application)) {
+    /*if (viewOnceState == ViewOnceState.DISABLED && !TextSecurePreferences.hasSeenViewOnceTooltip(application)) {
       event.postValue(Event.VIEW_ONCE_TOOLTIP);
-    }
+    }*/
   }
 
   private void updateAttachmentUploads(@NonNull List<Media> oldMedia, @NonNull List<Media> newMedia) {
     if (!preUploadEnabled) return;
 
-    DiffHelper.Result<Media> result = DiffHelper.calculate(oldMedia, newMedia);
+  //  DiffHelper.Result<Media> result = DiffHelper.calculate(oldMedia, newMedia);
 
-    uploadRepository.cancelUpload(result.getRemoved());
-    uploadRepository.startUpload(result.getInserted(), recipient);
+   // uploadRepository.cancelUpload(result.getRemoved());
+  //  uploadRepository.startUpload(result.getInserted(), recipient);
   }
 
   private void cancelUpload(@NonNull Media media) {
-    uploadRepository.cancelUpload(media);
+  //  uploadRepository.cancelUpload(media);
   }
 
   private void startUpload(@NonNull Media media) {
     if (!preUploadEnabled) return;
-    uploadRepository.startUpload(media, recipient);
+   // uploadRepository.startUpload(media, recipient);
   }
 
-  @WorkerThread
+ /* @WorkerThread
   private void sendMessages(@NonNull List<Recipient> recipients, @NonNull String body, @NonNull Collection<PreUploadResult> preUploadResults, @NonNull List<Mention> mentions) {
     List<OutgoingSecureMediaMessage> messages = new ArrayList<>(recipients.size());
 
@@ -667,23 +669,23 @@ class MediaSendViewModel extends ViewModel {
     }
 
     MessageSender.sendMediaBroadcast(application, messages, preUploadResults);
-  }
+  }*/
 
-  private static boolean shouldPreUpload(@NonNull Context context, boolean metered, boolean isSms, @Nullable Recipient recipient) {
-    return !metered && !isSms && !MessageSender.isLocalSelfSend(context, recipient, isSms);
-  }
+ /* private static boolean shouldPreUpload(@NonNull Context context, boolean metered, boolean isSms, @Nullable Recipient recipient) {
+    return *//*!metered && !isSms && !MessageSender.isLocalSelfSend(context, recipient, isSms)*//*false;
+  }*/
 
   @Override
   protected void onCleared() {
     if (!sentMedia) {
       clearPersistedMedia();
-      uploadRepository.cancelAllUploads();
-      uploadRepository.deleteAbandonedAttachments();
+     // uploadRepository.cancelAllUploads();
+     // uploadRepository.deleteAbandonedAttachments();
     }
   }
 
   boolean isSms() {
-    return transport.isSms();
+    return /*transport.isSms()*/false;
   }
 
   enum Error {
@@ -778,7 +780,7 @@ class MediaSendViewModel extends ViewModel {
 
     @Override
     public @NonNull <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-      return modelClass.cast(new MediaSendViewModel(application, repository, new MediaUploadRepository(application)));
+      return modelClass.cast(new MediaSendViewModel(application, repository/*, new MediaUploadRepository(application)*/));
     }
   }
 }

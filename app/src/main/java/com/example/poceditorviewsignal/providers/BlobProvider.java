@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.annotation.WorkerThread;
 
-import org.signal.core.util.StreamUtil;
+/*import org.signal.core.util.StreamUtil;
 import org.signal.core.util.concurrent.SignalExecutors;
 import org.signal.core.util.logging.Log;
 import org.thoughtcrime.securesms.BuildConfig;
@@ -22,7 +22,9 @@ import org.thoughtcrime.securesms.crypto.ModernDecryptingPartInputStream;
 import org.thoughtcrime.securesms.crypto.ModernEncryptingPartOutputStream;
 import org.thoughtcrime.securesms.util.IOFunction;
 import org.thoughtcrime.securesms.video.ByteArrayMediaDataSource;
-import org.thoughtcrime.securesms.video.EncryptedMediaDataSource;
+import org.thoughtcrime.securesms.video.EncryptedMediaDataSource;*/
+
+import com.example.poceditorviewsignal.BuildConfig;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -96,7 +98,7 @@ public class BlobProvider {
    * @throws IOException If the stream fails to open or the spec of the URI doesn't match.
    */
   public synchronized @NonNull InputStream getStream(@NonNull Context context, @NonNull Uri uri, long position) throws IOException {
-    return getBlobRepresentation(context,
+    return null;/*getBlobRepresentation(context,
                                  uri,
                                  bytes -> {
                                    ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
@@ -107,18 +109,18 @@ public class BlobProvider {
                                  },
                                  file -> ModernDecryptingPartInputStream.createFor(getAttachmentSecret(context),
                                                                                    file,
-                                                                                   position));
+                                                                                   position));*/
   }
 
   @RequiresApi(23)
   public synchronized @NonNull MediaDataSource getMediaDataSource(@NonNull Context context, @NonNull Uri uri) throws IOException {
-    return getBlobRepresentation(context,
+    return null;/*getBlobRepresentation(context,
                                  uri,
                                  ByteArrayMediaDataSource::new,
-                                 file -> EncryptedMediaDataSource.createForDiskBlob(getAttachmentSecret(context), file));
+                                 file -> EncryptedMediaDataSource.createForDiskBlob(getAttachmentSecret(context), file));*/
   }
 
-  private synchronized @NonNull <T> T getBlobRepresentation(@NonNull Context context,
+/*  private synchronized @NonNull <T> T getBlobRepresentation(@NonNull Context context,
                                                             @NonNull Uri uri,
                                                             @NonNull IOFunction<byte[], T> getByteRepresentation,
                                                             @NonNull IOFunction<File, T> getFileRepresentation)
@@ -148,18 +150,18 @@ public class BlobProvider {
     } else {
       throw new IOException("Provided URI does not match this spec. Uri: " + uri);
     }
-  }
+  }*/
 
-  private synchronized AttachmentSecret getAttachmentSecret(@NonNull Context context) {
+ /* private synchronized AttachmentSecret getAttachmentSecret(@NonNull Context context) {
     return AttachmentSecretProvider.getInstance(context).getOrCreateAttachmentSecret();
-  }
+  }*/
 
   /**
    * Delete the content with the specified URI.
    */
   public synchronized void delete(@NonNull Context context, @NonNull Uri uri) {
     if (!isAuthority(uri)) {
-      Log.d(TAG, "Can't delete. Not the authority for uri: " + uri);
+
       return;
     }
 
@@ -178,7 +180,7 @@ public class BlobProvider {
         }
       }
     } catch (IOException e) {
-      Log.w(TAG, "Failed to delete uri: " + uri, e);
+
     }
   }
 
@@ -219,7 +221,7 @@ public class BlobProvider {
 
   @WorkerThread
   public long calculateFileSize(@NonNull Context context, @NonNull Uri uri) {
-    if (!isAuthority(uri)) {
+   /* if (!isAuthority(uri)) {
       return 0;
     }
 
@@ -228,7 +230,8 @@ public class BlobProvider {
     } catch (IOException e) {
       Log.w(TAG, e);
       return 0;
-    }
+    }*/
+    return 0;
   }
 
   public static boolean isAuthority(@NonNull Uri uri) {
@@ -264,7 +267,7 @@ public class BlobProvider {
                                                              @Nullable ErrorListener errorListener)
       throws IOException
   {
-    AttachmentSecret attachmentSecret = AttachmentSecretProvider.getInstance(context).getOrCreateAttachmentSecret();
+   /* AttachmentSecret attachmentSecret = AttachmentSecretProvider.getInstance(context).getOrCreateAttachmentSecret();
     String           directory        = getDirectory(blobSpec.getStorageType());
     File             outputFile       = new File(getOrCreateCacheDirectory(context, directory), buildFileName(blobSpec.id));
     OutputStream     outputStream     = ModernEncryptingPartOutputStream.createFor(attachmentSecret, outputFile, true).second;
@@ -283,7 +286,8 @@ public class BlobProvider {
       }
     });
 
-    return buildUri(blobSpec);
+    return buildUri(blobSpec);*/
+    return null;
   }
 
   private synchronized @NonNull Uri writeBlobSpecToMemory(@NonNull BlobSpec blobSpec, @NonNull byte[] data) {

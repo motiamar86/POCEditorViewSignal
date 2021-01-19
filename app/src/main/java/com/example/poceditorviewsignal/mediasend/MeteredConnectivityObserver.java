@@ -14,7 +14,8 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import org.thoughtcrime.securesms.util.ServiceUtil;
+import com.example.poceditorviewsignal.ServiceUtil;
+
 
 /**
  * Lifecycle-bound observer for whether or not the active network connection is metered.

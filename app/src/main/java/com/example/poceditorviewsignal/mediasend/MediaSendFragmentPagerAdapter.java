@@ -1,6 +1,7 @@
 package com.example.poceditorviewsignal.mediasend;
 
 import android.net.Uri;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -13,6 +14,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import com.annimon.stream.Stream;
 import com.example.poceditorviewsignal.MediaConstraints;
 import com.example.poceditorviewsignal.MediaUtil;
+import com.example.poceditorviewsignal.MyApplication;
 
 /*import org.thoughtcrime.securesms.dependencies.ApplicationDependencies;
 import org.thoughtcrime.securesms.mms.MediaConstraints;
@@ -24,14 +26,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-class MediaSendFragmentPagerAdapter extends FragmentStatePagerAdapter {
+public class MediaSendFragmentPagerAdapter extends FragmentStatePagerAdapter {
 
   private final List<Media>                         media;
   private final Map<Integer, MediaSendPageFragment> fragments;
   private final Map<Uri, Object>                    savedState;
   private final MediaConstraints mediaConstraints;
 
-  MediaSendFragmentPagerAdapter(@NonNull FragmentManager fm, @NonNull MediaConstraints mediaConstraints) {
+  public MediaSendFragmentPagerAdapter(@NonNull FragmentManager fm, @NonNull MediaConstraints mediaConstraints) {
     super(fm);
     this.mediaConstraints = mediaConstraints;
     this.media            = new ArrayList<>();
@@ -41,6 +43,7 @@ class MediaSendFragmentPagerAdapter extends FragmentStatePagerAdapter {
 
   @Override
   public Fragment getItem(int i) {
+    Log.d("MNMNDDD", "getItem = " + i);
     Media mediaItem = media.get(i);
 
     if (MediaUtil.isGif(mediaItem.getMimeType())) {
@@ -49,8 +52,8 @@ class MediaSendFragmentPagerAdapter extends FragmentStatePagerAdapter {
       return ImageEditorFragment.newInstance(mediaItem.getUri());
     } else if (MediaUtil.isVideoType(mediaItem.getMimeType())) {
       return MediaSendVideoFragment.newInstance(mediaItem.getUri(),
-                                                mediaConstraints.getCompressedVideoMaxSize(ApplicationDependencies.getApplication()),
-                                                mediaConstraints.getVideoMaxSize(ApplicationDependencies.getApplication()));
+                                                mediaConstraints.getCompressedVideoMaxSize(MyApplication.getContext()),
+                                                mediaConstraints.getVideoMaxSize(MyApplication.getContext()));
     } else {
       throw new UnsupportedOperationException("Can only render images and videos. Found mimetype: '" + mediaItem.getMimeType() + "'");
     }

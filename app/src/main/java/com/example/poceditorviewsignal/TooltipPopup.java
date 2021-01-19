@@ -16,9 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
-
-import org.thoughtcrime.securesms.mms.GlideApp;
-
 /**
  * Class for creating simple tooltips to show throughout the app. Utilizes a popup window so you
  * don't have to worry about view hierarchies or anything.

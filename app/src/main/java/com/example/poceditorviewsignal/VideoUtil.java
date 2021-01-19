@@ -9,7 +9,6 @@ import android.util.Size;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
-import org.thoughtcrime.securesms.mms.MediaConstraints;
 
 import java.util.concurrent.TimeUnit;
 

@@ -71,15 +71,15 @@ public class DeprecatedPersistentBlobProvider {
     return instance;
   }
 
-  private final AttachmentSecret  attachmentSecret;
+  //private final AttachmentSecret  attachmentSecret;
 
   private DeprecatedPersistentBlobProvider(@NonNull Context context) {
-    this.attachmentSecret = AttachmentSecretProvider.getInstance(context).getOrCreateAttachmentSecret();
+ //  this.attachmentSecret = AttachmentSecretProvider.getInstance(context).getOrCreateAttachmentSecret();
   }
 
   public Uri createForExternal(@NonNull Context context, @NonNull String mimeType) throws IOException {
     File target = new File(getExternalDir(context), String.valueOf(System.currentTimeMillis()) + "." + getExtensionFromMimeType(mimeType));
-    return FileProviderUtil.getUriFor(context, target);
+    return null; //FileProviderUtil.getUriFor(context, target);
   }
 
   public boolean delete(@NonNull Context context, @NonNull Uri uri) {
@@ -92,18 +92,18 @@ public class DeprecatedPersistentBlobProvider {
 
     //noinspection SimplifiableIfStatement
     if (isExternalBlobUri(context, uri)) {
-      return FileProviderUtil.delete(context, uri);
+      return false;//FileProviderUtil.delete(context, uri);
     }
 
     return false;
   }
 
-  public @NonNull InputStream getStream(@NonNull Context context, long id) throws IOException {
+  /*public @NonNull InputStream getStream(@NonNull Context context, long id) throws IOException {
     FileData fileData = getFile(context, id);
 
     if (fileData.modern) return ModernDecryptingPartInputStream.createFor(attachmentSecret, fileData.file, 0);
     else                 return ClassicDecryptingPartInputStream.createFor(attachmentSecret, fileData.file);
-  }
+  }*/
 
   private FileData getFile(@NonNull Context context, long id) {
     File legacy      = getLegacyFile(context, id);
@@ -150,7 +150,7 @@ public class DeprecatedPersistentBlobProvider {
     try {
       return Long.valueOf(persistentBlobUri.getPathSegments().get(FILESIZE_PATH_SEGMENT));
     } catch (NumberFormatException e) {
-      Log.w(TAG, e);
+
       return null;
     }
   }
@@ -179,9 +179,9 @@ public class DeprecatedPersistentBlobProvider {
 
   private static boolean isExternalBlobUri(@NonNull Context context, @NonNull Uri uri) {
     try {
-      return uri.getPath().startsWith(getExternalDir(context).getAbsolutePath()) || FileProviderUtil.isAuthority(uri);
+      return uri.getPath().startsWith(getExternalDir(context).getAbsolutePath()) /*|| FileProviderUtil.isAuthority(uri)*/;
     } catch (IOException ioe) {
-      Log.w(TAG, "Failed to determine if it's an external blob URI.", ioe);
+
       return false;
     }
   }

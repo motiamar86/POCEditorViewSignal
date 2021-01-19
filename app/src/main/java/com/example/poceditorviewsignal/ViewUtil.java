@@ -42,9 +42,12 @@ import androidx.core.view.ViewCompat;
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 import androidx.lifecycle.Lifecycle;
 
-import org.thoughtcrime.securesms.util.concurrent.ListenableFuture;
+import com.example.poceditorviewsignal.views.ListenableFuture;
+import com.example.poceditorviewsignal.views.SettableFuture;
+
+/*import org.thoughtcrime.securesms.util.concurrent.ListenableFuture;
 import org.thoughtcrime.securesms.util.concurrent.SettableFuture;
-import org.thoughtcrime.securesms.util.views.Stub;
+import org.thoughtcrime.securesms.util.views.Stub;*/
 
 public final class ViewUtil {
 

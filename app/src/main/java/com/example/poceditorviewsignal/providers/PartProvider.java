@@ -7,11 +7,12 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.MemoryFile;
 import android.os.ParcelFileDescriptor;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import org.signal.core.util.StreamUtil;
+/*import org.signal.core.util.StreamUtil;
 import org.signal.core.util.logging.Log;
 import org.thoughtcrime.securesms.BuildConfig;
 import org.thoughtcrime.securesms.attachments.AttachmentId;
@@ -20,7 +21,10 @@ import org.thoughtcrime.securesms.database.DatabaseFactory;
 import org.thoughtcrime.securesms.mms.PartUriParser;
 import org.thoughtcrime.securesms.service.KeyCachingService;
 import org.thoughtcrime.securesms.util.MemoryFileUtil;
-import org.thoughtcrime.securesms.util.Util;
+import org.thoughtcrime.securesms.util.Util;*/
+
+import com.example.poceditorviewsignal.BuildConfig;
+import com.example.poceditorviewsignal.mms.PartUriParser;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -29,7 +33,7 @@ import java.io.OutputStream;
 
 public final class PartProvider extends BaseContentProvider {
 
-  private static final String TAG = Log.tag(PartProvider.class);
+  private static final String TAG = PartProvider.class.getName();
 
   private static final String CONTENT_AUTHORITY  = BuildConfig.APPLICATION_ID + ".part";
   private static final String CONTENT_URI_STRING = "content://" + CONTENT_AUTHORITY + "/part";
@@ -49,29 +53,30 @@ public final class PartProvider extends BaseContentProvider {
     return true;
   }
 
-  public static Uri getContentUri(AttachmentId attachmentId) {
+ /* public static Uri getContentUri(AttachmentId attachmentId) {
     Uri uri = Uri.withAppendedPath(CONTENT_URI, String.valueOf(attachmentId.getUniqueId()));
     return ContentUris.withAppendedId(uri, attachmentId.getRowId());
-  }
+  }*/
 
   @Override
   public ParcelFileDescriptor openFile(@NonNull Uri uri, @NonNull String mode) throws FileNotFoundException {
     Log.i(TAG, "openFile() called!");
 
-    if (KeyCachingService.isLocked(getContext())) {
+   /* if (KeyCachingService.isLocked(getContext())) {
       Log.w(TAG, "masterSecret was null, abandoning.");
       return null;
-    }
+    }*/
 
     if (uriMatcher.match(uri) == SINGLE_ROW) {
       Log.i(TAG, "Parting out a single row...");
-      try {
+     // try {
         final PartUriParser partUri = new PartUriParser(uri);
-        return getParcelStreamForAttachment(partUri.getPartId());
-      } catch (IOException ioe) {
+       // return getParcelStreamForAttachment(partUri.getPartId());
+        return null;
+      /*} catch (IOException ioe) {
         Log.w(TAG, ioe);
         throw new FileNotFoundException("Error opening file");
-      }
+      }*/
     }
 
     throw new FileNotFoundException("Request for bad part.");
@@ -89,12 +94,12 @@ public final class PartProvider extends BaseContentProvider {
 
     if (uriMatcher.match(uri) == SINGLE_ROW) {
       PartUriParser      partUriParser = new PartUriParser(uri);
-      DatabaseAttachment attachment    = DatabaseFactory.getAttachmentDatabase(getContext()).getAttachment(partUriParser.getPartId());
+     /* DatabaseAttachment attachment    = DatabaseFactory.getAttachmentDatabase(getContext()).getAttachment(partUriParser.getPartId());
 
       if (attachment != null) {
         Log.i(TAG, "getType() called: " + uri + " It's " + attachment.getContentType());
         return attachment.getContentType();
-      }
+      }*/
     }
 
     return null;
@@ -110,7 +115,7 @@ public final class PartProvider extends BaseContentProvider {
   public Cursor query(@NonNull Uri url, @Nullable String[] projection, String selection, String[] selectionArgs, String sortOrder) {
     Log.i(TAG, "query() called: " + url);
 
-    if (uriMatcher.match(url) == SINGLE_ROW) {
+   /* if (uriMatcher.match(url) == SINGLE_ROW) {
       PartUriParser      partUri    = new PartUriParser(url);
       DatabaseAttachment attachment = DatabaseFactory.getAttachmentDatabase(getContext()).getAttachment(partUri.getPartId());
 
@@ -127,7 +132,7 @@ public final class PartProvider extends BaseContentProvider {
                                                          : createFileNameForMimeType(attachment.getContentType());
 
       return createCursor(projection, fileName, fileSize);
-    } else {
+    } else */{
       return null;
     }
   }
@@ -138,8 +143,8 @@ public final class PartProvider extends BaseContentProvider {
     return 0;
   }
 
-  private ParcelFileDescriptor getParcelStreamForAttachment(AttachmentId attachmentId) throws IOException {
-    long       plaintextLength = StreamUtil.getStreamLength(DatabaseFactory.getAttachmentDatabase(getContext()).getAttachmentStream(attachmentId, 0));
+  private ParcelFileDescriptor getParcelStreamForAttachment(/*AttachmentId attachmentId*/) throws IOException {
+  /*  long       plaintextLength = StreamUtil.getStreamLength(DatabaseFactory.getAttachmentDatabase(getContext()).getAttachmentStream(attachmentId, 0));
     MemoryFile memoryFile      = new MemoryFile(attachmentId.toString(), Util.toIntExact(plaintextLength));
 
     InputStream  in  = DatabaseFactory.getAttachmentDatabase(getContext()).getAttachmentStream(attachmentId, 0);
@@ -149,6 +154,7 @@ public final class PartProvider extends BaseContentProvider {
     StreamUtil.close(out);
     StreamUtil.close(in);
 
-    return MemoryFileUtil.getParcelFileDescriptor(memoryFile);
+    return MemoryFileUtil.getParcelFileDescriptor(memoryFile);*/
+    return null;
   }
 }

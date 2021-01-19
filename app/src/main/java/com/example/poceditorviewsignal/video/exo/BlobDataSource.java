@@ -7,11 +7,11 @@ import android.net.Uri;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.poceditorviewsignal.providers.BlobProvider;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DataSpec;
 import com.google.android.exoplayer2.upstream.TransferListener;
 
-import org.thoughtcrime.securesms.providers.BlobProvider;
 
 import java.io.EOFException;
 import java.io.IOException;

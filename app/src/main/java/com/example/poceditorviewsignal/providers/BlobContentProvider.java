@@ -9,11 +9,14 @@ import android.os.ParcelFileDescriptor;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import org.signal.core.util.StreamUtil;
+/*import org.signal.core.util.StreamUtil;
 import org.signal.core.util.logging.Log;
 import org.thoughtcrime.securesms.dependencies.ApplicationDependencies;
 import org.thoughtcrime.securesms.util.MemoryFileUtil;
-import org.thoughtcrime.securesms.util.Util;
+import org.thoughtcrime.securesms.util.Util;*/
+
+import com.example.poceditorviewsignal.MyApplication;
+import com.example.poceditorviewsignal.Util;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -22,23 +25,20 @@ import java.io.OutputStream;
 
 public final class BlobContentProvider extends BaseContentProvider {
 
-  private static final String TAG = Log.tag(BlobContentProvider.class);
+  private static final String TAG = "";
 
   @Override
   public boolean onCreate() {
-    Log.i(TAG, "onCreate()");
     return true;
   }
 
   @Override
   public ParcelFileDescriptor openFile(@NonNull Uri uri, @NonNull String mode) throws FileNotFoundException {
-    Log.i(TAG, "openFile() called: " + uri);
 
     try {
-      try (InputStream stream = BlobProvider.getInstance().getStream(ApplicationDependencies.getApplication(), uri)) {
+      try (InputStream stream = BlobProvider.getInstance().getStream(MyApplication.getContext(), uri)) {
         Long fileSize = BlobProvider.getFileSize(uri);
         if (fileSize == null) {
-          Log.w(TAG, "No file size available");
           throw new FileNotFoundException();
         }
 
@@ -50,19 +50,19 @@ public final class BlobContentProvider extends BaseContentProvider {
   }
 
   private static @NonNull ParcelFileDescriptor getParcelStreamForStream(@NonNull InputStream in, int fileSize) throws IOException {
-    MemoryFile memoryFile = new MemoryFile(null, fileSize);
+    /*MemoryFile memoryFile = new MemoryFile(null, fileSize);
 
     try (OutputStream out = memoryFile.getOutputStream()) {
       StreamUtil.copy(in, out);
     }
 
-    return MemoryFileUtil.getParcelFileDescriptor(memoryFile);
+    return MemoryFileUtil.getParcelFileDescriptor(memoryFile);*/
+    return null;
   }
 
   @Nullable
   @Override
   public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
-    Log.i(TAG, "query() called: " + uri);
 
     if (projection == null || projection.length <= 0) return null;
 
@@ -71,12 +71,10 @@ public final class BlobContentProvider extends BaseContentProvider {
     Long   fileSize = BlobProvider.getFileSize(uri);
 
     if (fileSize == null) {
-      Log.w(TAG, "No file size");
       return null;
     }
 
     if (mimeType == null) {
-      Log.w(TAG, "No mime type");
       return null;
     }
 

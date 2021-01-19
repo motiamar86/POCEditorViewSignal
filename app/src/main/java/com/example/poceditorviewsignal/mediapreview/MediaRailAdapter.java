@@ -1,3 +1,4 @@
+/*
 package com.example.poceditorviewsignal.mediapreview;
 
 import android.view.LayoutInflater;
@@ -8,11 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+*/
 /*import org.thoughtcrime.securesms.R;
 import org.thoughtcrime.securesms.components.ThumbnailView;
 import org.thoughtcrime.securesms.mediasend.Media;
 import org.thoughtcrime.securesms.mms.GlideRequests;
-import org.thoughtcrime.securesms.util.adapter.StableIdGenerator;*/
+import org.thoughtcrime.securesms.util.adapter.StableIdGenerator;*//*
+
 
 import com.example.poceditorviewsignal.R;
 import com.example.poceditorviewsignal.mediasend.Media;
@@ -214,3 +217,4 @@ public class MediaRailAdapter extends RecyclerView.Adapter<MediaRailAdapter.Medi
     void onRailItemAddClicked();
   }
 }
+*/

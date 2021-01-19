@@ -1,3 +1,4 @@
+/*
 package com.example.poceditorviewsignal.mediasend;
 
 import android.Manifest;
@@ -34,10 +35,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
+import com.example.SimpleProgressDialog;
+import com.example.poceditorviewsignal.CameraFragment;
+import com.example.poceditorviewsignal.InputAwareLayout;
+import com.example.poceditorviewsignal.MediaPickerItemFragment;
 import com.example.poceditorviewsignal.R;
+import com.example.poceditorviewsignal.Stub;
+import com.example.poceditorviewsignal.TooltipPopup;
 import com.example.poceditorviewsignal.Util;
 import com.example.poceditorviewsignal.mediapreview.MediaRailAdapter;
+import com.example.poceditorviewsignal.permissions.Permissions;
 
+*/
 /*import org.signal.core.util.logging.Log;
 import org.thoughtcrime.securesms.PassphraseRequiredActivity;
 import org.thoughtcrime.securesms.R;
@@ -77,7 +86,9 @@ import org.thoughtcrime.securesms.util.concurrent.SimpleTask;
 import org.thoughtcrime.securesms.util.livedata.LiveDataUtil;
 import org.thoughtcrime.securesms.util.views.SimpleProgressDialog;
 import org.thoughtcrime.securesms.util.views.Stub;
-import org.thoughtcrime.securesms.video.VideoUtil;*/
+import org.thoughtcrime.securesms.video.VideoUtil;*//*
+
+
 import org.whispersystems.libsignal.util.guava.Optional;
 
 import java.io.FileDescriptor;
@@ -92,13 +103,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-/**
- * Encompasses the entire flow of sending media, starting from the selection process to the actual
- * captioning and editing of the content.
- *
- * This activity is intended to be launched via {@link #startActivityForResult(Intent, int)}.
- * It will return the {@link Media} that the user decided to send.
- */
+
+
+
 public class MediaSendActivity extends PassphraseRequiredActivity implements MediaPickerFolderFragment.Controller,
                                                                                       MediaPickerItemFragment.Controller,
                                                                                       ImageEditorFragment.Controller,
@@ -146,7 +153,7 @@ public class MediaSendActivity extends PassphraseRequiredActivity implements Med
   private EmojiEditText       captionText;
   private EmojiToggle         emojiToggle;
   private Stub<MediaKeyboard> emojiDrawer;
-  private Stub<View>          mentionSuggestions;
+  private Stub<View> mentionSuggestions;
   private TextView            charactersLeft;
   private RecyclerView mediaRail;
   private MediaRailAdapter mediaRailAdapter;
@@ -155,9 +162,8 @@ public class MediaSendActivity extends PassphraseRequiredActivity implements Med
 
   private final Rect visibleBounds = new Rect();
 
-  /**
-   * Get an intent to launch the media send flow starting with the picker.
-   */
+
+
   public static Intent buildGalleryIntent(@NonNull Context context, @NonNull Recipient recipient, @Nullable CharSequence body, @NonNull TransportOption transport) {
     Intent intent = new Intent(context, MediaSendActivity.class);
     intent.putExtra(KEY_RECIPIENT, recipient.getId());
@@ -174,19 +180,14 @@ public class MediaSendActivity extends PassphraseRequiredActivity implements Med
     return intent;
   }
 
-  /**
-   * Get an intent to launch the media send flow starting with the picker.
-   */
+
   public static Intent buildCameraIntent(@NonNull Context context, @NonNull Recipient recipient, @NonNull TransportOption transport) {
     Intent intent = buildGalleryIntent(context, recipient, "", transport);
     intent.putExtra(KEY_IS_CAMERA, true);
     return intent;
   }
 
-  /**
-   * Get an intent to launch the media send flow with a specific list of media. Will jump right to
-   * the editor screen.
-   */
+
   public static Intent buildEditorIntent(@NonNull Context context,
                                          @NonNull List<Media> media,
                                          @NonNull Recipient recipient,
@@ -635,19 +636,19 @@ public class MediaSendActivity extends PassphraseRequiredActivity implements Med
   }
 
   private void initViewModel() {
-    LiveData<Pair<HudState, Boolean>> hudStateAndMentionShowing = LiveDataUtil.combineLatest(viewModel.getHudState(),
+    LiveData<Pair<MediaSendViewModel.HudState, Boolean>> hudStateAndMentionShowing = LiveDataUtil.combineLatest(viewModel.getHudState(),
                                                                                              mentionsViewModel != null ? mentionsViewModel.isShowing()
                                                                                                                        : new MutableLiveData<>(false),
                                                                                              Pair::new);
 
     hudStateAndMentionShowing.observe(this, p -> {
-      HudState state                  = Objects.requireNonNull(p.first);
+      MediaSendViewModel.HudState state                  = Objects.requireNonNull(p.first);
       boolean  isMentionPickerShowing = Objects.requireNonNull(p.second);
       int      captionBackground      = R.color.transparent_black_40;
 
       if (state.getRailState() == MediaSendViewModel.RailState.VIEWABLE) {
         captionBackground = R.color.core_grey_90;
-      } else if (state.getViewOnceState() == ViewOnceState.ENABLED) {
+      } else if (state.getViewOnceState() == MediaSendViewModel.ViewOnceState.ENABLED) {
         captionBackground = 0;
       } else if (isMentionPickerShowing){
         captionBackground = R.color.signal_background_dialog;
@@ -660,7 +661,7 @@ public class MediaSendActivity extends PassphraseRequiredActivity implements Med
       if (state == null) return;
 
       hud.setVisibility(state.isHudVisible() ? View.VISIBLE : View.GONE);
-      composeContainer.setVisibility(state.isComposeVisible() ? View.VISIBLE : (state.getViewOnceState() == ViewOnceState.GONE ? View.GONE : View.INVISIBLE));
+      composeContainer.setVisibility(state.isComposeVisible() ? View.VISIBLE : (state.getViewOnceState() == MediaSendViewModel.ViewOnceState.GONE ? View.GONE : View.INVISIBLE));
       captionText.setVisibility(state.isCaptionVisible() ? View.VISIBLE : View.GONE);
 
       switch (state.getButtonState()) {
@@ -1042,3 +1043,4 @@ public class MediaSendActivity extends PassphraseRequiredActivity implements Med
     }
   }
 }
+*/

@@ -77,10 +77,10 @@ public class PartAuthority {
 
     switch (match) {
     case PART_ROW:
-      Attachment attachment = DatabaseFactory.getAttachmentDatabase(context).getAttachment(new PartUriParser(uri).getPartId());
+      //Attachment attachment = DatabaseFactory.getAttachmentDatabase(context).getAttachment(new PartUriParser(uri).getPartId());
 
-      if (attachment != null) return attachment.getFileName();
-      else                    return null;
+     // if (attachment != null) return attachment.getFileName();
+     /* else*/                    return null;
     case PERSISTENT_ROW:
       return DeprecatedPersistentBlobProvider.getFileName(context, uri);
     case BLOB_ROW:
@@ -95,10 +95,10 @@ public class PartAuthority {
 
     switch (match) {
       case PART_ROW:
-        Attachment attachment = DatabaseFactory.getAttachmentDatabase(context).getAttachment(new PartUriParser(uri).getPartId());
+      /*  Attachment attachment = DatabaseFactory.getAttachmentDatabase(context).getAttachment(new PartUriParser(uri).getPartId());
 
         if (attachment != null) return attachment.getSize();
-        else                    return null;
+        else*/                    return null;
       case PERSISTENT_ROW:
         return DeprecatedPersistentBlobProvider.getFileSize(context, uri);
       case BLOB_ROW:
@@ -113,10 +113,10 @@ public class PartAuthority {
 
     switch (match) {
       case PART_ROW:
-        Attachment attachment = DatabaseFactory.getAttachmentDatabase(context).getAttachment(new PartUriParser(uri).getPartId());
+       /* Attachment attachment = DatabaseFactory.getAttachmentDatabase(context).getAttachment(new PartUriParser(uri).getPartId());
 
         if (attachment != null) return attachment.getContentType();
-        else                    return null;
+        else               */     return null;
       case PERSISTENT_ROW:
         return DeprecatedPersistentBlobProvider.getMimeType(context, uri);
       case BLOB_ROW:
@@ -127,18 +127,20 @@ public class PartAuthority {
   }
 
   public static Uri getAttachmentPublicUri(Uri uri) {
-    PartUriParser partUri = new PartUriParser(uri);
-    return PartProvider.getContentUri(partUri.getPartId());
+  /*  PartUriParser partUri = new PartUriParser(uri);
+    return PartProvider.getContentUri(partUri.getPartId());*/
+    //TODO set here the URI
+    return null;
   }
 
-  public static Uri getAttachmentDataUri(AttachmentId attachmentId) {
+/*  public static Uri getAttachmentDataUri(AttachmentId attachmentId) {
     Uri uri = Uri.withAppendedPath(PART_CONTENT_URI, String.valueOf(attachmentId.getUniqueId()));
     return ContentUris.withAppendedId(uri, attachmentId.getRowId());
   }
 
   public static Uri getAttachmentThumbnailUri(AttachmentId attachmentId) {
     return getAttachmentDataUri(attachmentId);
-  }
+  }*/
 
   public static Uri getStickerUri(long id) {
     return ContentUris.withAppendedId(STICKER_CONTENT_URI, id);
@@ -159,7 +161,7 @@ public class PartAuthority {
     return uriMatcher.match(uri) == PART_ROW;
   }
 
-  public static @NonNull AttachmentId requireAttachmentId(@NonNull Uri uri) {
+/*  public static @NonNull AttachmentId requireAttachmentId(@NonNull Uri uri) {
     return new PartUriParser(uri).getPartId();
-  }
+  }*/
 }

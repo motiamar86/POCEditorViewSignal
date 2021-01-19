@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 
+import com.example.poceditorviewsignal.GlideApp;
+import com.example.poceditorviewsignal.GlideRequests;
 import com.example.poceditorviewsignal.MediaUtil;
 import com.example.poceditorviewsignal.R;
 import com.example.poceditorviewsignal.mms.ZoomingImageView;
@@ -23,7 +25,7 @@ public final class ImageMediaPreviewFragment extends MediaPreviewFragment {
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
     ZoomingImageView zoomingImageView = (ZoomingImageView) inflater.inflate(R.layout.media_preview_image_fragment, container, false);
-    GlideRequests    glideRequests    = GlideApp.with(requireActivity());
+    GlideRequests glideRequests    = GlideApp.with(requireActivity());
     Bundle           arguments        = requireArguments();
     Uri              uri              = arguments.getParcelable(DATA_URI);
     String           contentType      = arguments.getString(DATA_CONTENT_TYPE);

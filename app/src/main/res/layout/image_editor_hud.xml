@@ -16,7 +16,7 @@
 
         <LinearLayout
             android:id="@+id/scribble_toolbar"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="10dp"
@@ -27,7 +27,8 @@
 
             <ImageView
                 android:id="@+id/scribble_delete_button"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:padding="8dp"
@@ -35,7 +36,8 @@
 
             <ImageView
                 android:id="@+id/scribble_undo_button"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:padding="8dp"
@@ -43,15 +45,18 @@
 
             <ImageView
                 android:id="@+id/scribble_save_button"
-                android:layout_width="42dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="42dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:padding="8dp"
+                android:visibility="gone"
                 android:src="@drawable/ic_download_32" />
 
             <ImageView
                 android:id="@+id/scribble_text_button"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:padding="8dp"
@@ -59,7 +64,8 @@
 
             <ImageView
                 android:id="@+id/scribble_draw_button"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:padding="8dp"
@@ -67,7 +73,8 @@
 
             <ImageView
                 android:id="@+id/scribble_highlight_button"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:padding="8dp"
@@ -76,7 +83,8 @@
 
             <ImageView
                 android:id="@+id/scribble_blur_button"
-                android:layout_width="48dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="48dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:padding="8dp"
@@ -84,15 +92,18 @@
 
             <ImageView
                 android:id="@+id/scribble_sticker_button"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:padding="8dp"
+                android:visibility="gone"
                 android:src="@drawable/ic_sticker_32" />
 
             <ImageView
                 android:id="@+id/scribble_crop_button"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:padding="8dp"
@@ -100,7 +111,8 @@
 
             <ImageView
                 android:id="@+id/scribble_confirm_button"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:padding="8dp"
@@ -108,7 +120,8 @@
 
             <ImageView
                 android:id="@+id/scribble_done_button"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:padding="8dp"

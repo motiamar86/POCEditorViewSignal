@@ -101,7 +101,7 @@ public class MediaPreviewViewModel extends ViewModel {
     else              return cursor.getCount() - 1 - position;
   }
 
-  private @Nullable Media toMedia(@NonNull MediaRecord mediaRecord) {
+/*  private @Nullable Media toMedia(@NonNull MediaRecord mediaRecord) {
     //TODO Change to our URI
     Uri uri = Uri.parse("");//mediaRecord.getAttachment().getUri();
 
@@ -111,16 +111,16 @@ public class MediaPreviewViewModel extends ViewModel {
 
     return new Media(uri,
             //TODO Change to our All Properties
-                     /*mediaRecord.getContentType()*/"image/*",
-                     /*mediaRecord.getDate()*/464546548974654L,
-                     /*mediaRecord.getAttachment().getWidth()*/500,
-                     /*mediaRecord.getAttachment().getHeight()*/500,
-                     /*mediaRecord.getAttachment().getSize()*/500,
+                     *//*mediaRecord.getContentType()*//*"image/*",
+                     *//*mediaRecord.getDate()*//*464546548974654L,
+                     *//*mediaRecord.getAttachment().getWidth()*//*500,
+                     *//*mediaRecord.getAttachment().getHeight()*//*500,
+                     *//*mediaRecord.getAttachment().getSize()*//*500,
                      0,
-                     /*mediaRecord.getAttachment().isBorderless()*/true,
-                     /*Optional.absent()*/Optional.absent(),
-                     /*Optional.fromNullable(mediaRecord.getAttachment().getCaption())*/Optional.absent());
-  }
+                     *//*mediaRecord.getAttachment().isBorderless()*//*true,
+                     *//*Optional.absent()*//*Optional.absent(),
+                     *//*Optional.fromNullable(mediaRecord.getAttachment().getCaption())*//*Optional.absent());
+  }*/
 
   public LiveData<PreviewData> getPreviewData() {
     return previewData;

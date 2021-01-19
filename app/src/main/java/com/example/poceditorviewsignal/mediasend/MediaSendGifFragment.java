@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.poceditorviewsignal.DecryptableStreamUriLoader;
+import com.example.poceditorviewsignal.GlideApp;
 import com.example.poceditorviewsignal.R;
 
 /*import org.thoughtcrime.securesms.R;

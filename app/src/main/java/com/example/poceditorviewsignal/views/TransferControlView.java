@@ -193,24 +193,26 @@ public final class TransferControlView extends FrameLayout {
   }
 
   private int getTransferState(@NonNull List<Slide> slides) {
-    int transferState = AttachmentDatabase.TRANSFER_PROGRESS_DONE;
+   /* int transferState = AttachmentDatabase.TRANSFER_PROGRESS_DONE;
     for (Slide slide : slides) {
       if (slide.getTransferState() == AttachmentDatabase.TRANSFER_PROGRESS_PENDING && transferState == AttachmentDatabase.TRANSFER_PROGRESS_DONE) {
         transferState = slide.getTransferState();
       } else {
         transferState = Math.max(transferState, slide.getTransferState());
       }
-    }
-    return transferState;
+    }*/
+
+    return 0;
   }
 
   private String getDownloadText(@NonNull List<Slide> slides) {
-    if (slides.size() == 1) {
+   /* if (slides.size() == 1) {
       return slides.get(0).getContentDescription();
     } else {
       int downloadCount = Stream.of(slides).reduce(0, (count, slide) -> slide.getTransferState() != AttachmentDatabase.TRANSFER_PROGRESS_DONE ? count + 1 : count);
       return getContext().getResources().getQuantityString(R.plurals.TransferControlView_n_items, downloadCount, downloadCount);
-    }
+    }*/
+    return "getDownloadText";
   }
 
   private void display(@Nullable final View view) {

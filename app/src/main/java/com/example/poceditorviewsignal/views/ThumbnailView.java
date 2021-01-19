@@ -21,8 +21,11 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.FitCenter;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.poceditorviewsignal.DecryptableStreamUriLoader;
 import com.example.poceditorviewsignal.GlideBitmapListeningTarget;
 import com.example.poceditorviewsignal.GlideDrawableListeningTarget;
+import com.example.poceditorviewsignal.GlideRequest;
+import com.example.poceditorviewsignal.GlideRequests;
 import com.example.poceditorviewsignal.MediaUtil;
 import com.example.poceditorviewsignal.R;
 import com.example.poceditorviewsignal.Util;
@@ -369,7 +372,7 @@ public class ThumbnailView extends FrameLayout {
     if (transferControls.isPresent()) getTransferControls().setVisibility(View.GONE);
 
     //Todo pass the relevant URI
-    GlideRequest request = glideRequests.load(Uri.parse(""))
+    GlideRequest request = glideRequests.load(uri)
                                         .diskCacheStrategy(DiskCacheStrategy.NONE)
                                         .transition(withCrossFade());
 
@@ -424,12 +427,12 @@ public class ThumbnailView extends FrameLayout {
   }
 
   private GlideRequest buildThumbnailGlideRequest(@NonNull GlideRequests glideRequests, @NonNull Slide slide) {
-    GlideRequest request = applySizing(glideRequests.load(new DecryptableUri(slide.getUri()))
+    GlideRequest request = applySizing(glideRequests.load(new DecryptableStreamUriLoader.DecryptableUri(slide.getUri()))
                                           .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                                           .transition(withCrossFade()), fit);
 
     if (slide.isInProgress()) return request;
-    else                      return request.apply(RequestOptions.errorOf(R.drawable.ic_missing_thumbnail_picture));
+    else                      return request.apply(RequestOptions.errorOf(R.drawable.exo_controls_fastforward));
   }
 
   private RequestBuilder buildPlaceholderGlideRequest(@NonNull GlideRequests glideRequests, @NonNull Slide slide) {

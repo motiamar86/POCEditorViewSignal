@@ -16,6 +16,7 @@ import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.davemorrissey.labs.subscaleview.decoder.DecoderFactory;
 import com.example.poceditorviewsignal.BitmapDecodingException;
+import com.example.poceditorviewsignal.GlideRequests;
 import com.example.poceditorviewsignal.MediaUtil;
 import com.example.poceditorviewsignal.R;
 import com.example.poceditorviewsignal.SimpleTask;
@@ -47,7 +48,7 @@ import java.io.InputStream;
 
 public class ZoomingImageView extends FrameLayout {
 
-  private static final String TAG = ZoomingImageView.class.getSimpleName();
+  private static final String TAG = "ZoomingImageView.class.getSimpleName()";
 
   private static final int ZOOM_TRANSITION_DURATION = 300;
 
@@ -100,7 +101,7 @@ public class ZoomingImageView extends FrameLayout {
       try {
         InputStream inputStream = PartAuthority.getAttachmentStream(context, uri);
         return BitmapUtil.getDimensions(inputStream);
-      } catch (IOException | BitmapDecodingException e) {
+      } catch (IOException | BitmapDecodingException/* | BitmapDecodingException*/ e) {
         Log.w(TAG, e);
         return null;
       }
@@ -122,7 +123,7 @@ public class ZoomingImageView extends FrameLayout {
     subsamplingImageView.setVisibility(View.GONE);
 
     //TODO Change to our URI
-    glideRequests.load(/*new DecryptableUri(uri)*/ Uri.parse(""))
+    glideRequests.load(/*new DecryptableUri(uri)*/ Uri.parse("content://media/external/images/media/4913"))
                  .diskCacheStrategy(DiskCacheStrategy.NONE)
                  .dontTransform()
                  .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)

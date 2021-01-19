@@ -7,8 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 /**
- * The local extent of a {@link org.thoughtcrime.securesms.imageeditor.model.EditorElement}.
- * i.e. all {@link org.thoughtcrime.securesms.imageeditor.model.EditorElement}s have a bounding rectangle from:
  * <p>
  * {@link #LEFT} to {@link #RIGHT} and from {@link #TOP} to {@link #BOTTOM}.
  */

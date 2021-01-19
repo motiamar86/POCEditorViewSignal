@@ -78,6 +78,6 @@ public abstract class MediaConstraints {
   }
 
   public static boolean isVideoTranscodeAvailable() {
-    return Build.VERSION.SDK_INT >= 26 && (FeatureFlags.useStreamingVideoMuxer() || MemoryFileDescriptor.supported());
+    return Build.VERSION.SDK_INT >= 26/* && (FeatureFlags.useStreamingVideoMuxer() || MemoryFileDescriptor.supported())*/;
   }
 }

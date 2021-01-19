@@ -40,9 +40,9 @@ public final class ImageEditorHud extends LinearLayout {
   private View                     highlightButton;
   private View                     blurButton;
   private View                     textButton;
-  private View                     stickerButton;
+  //private View                     stickerButton;
   private View                     undoButton;
-  private View                     saveButton;
+  //private View                     saveButton;
   private View                     deleteButton;
   private View                     confirmButton;
   private View                     doneButton;
@@ -93,9 +93,9 @@ public final class ImageEditorHud extends LinearLayout {
     highlightButton  = findViewById(R.id.scribble_highlight_button);
     blurButton       = findViewById(R.id.scribble_blur_button);
     textButton       = findViewById(R.id.scribble_text_button);
-    stickerButton    = findViewById(R.id.scribble_sticker_button);
+   // stickerButton    = findViewById(R.id.scribble_sticker_button);
     undoButton       = findViewById(R.id.scribble_undo_button);
-    saveButton       = findViewById(R.id.scribble_save_button);
+  //  saveButton       = findViewById(R.id.scribble_save_button);
     deleteButton     = findViewById(R.id.scribble_delete_button);
     confirmButton    = findViewById(R.id.scribble_confirm_button);
     colorPicker      = findViewById(R.id.scribble_color_picker);
@@ -119,7 +119,7 @@ public final class ImageEditorHud extends LinearLayout {
   }
 
   private void initializeVisibilityMap() {
-    setVisibleViewsWhenInMode(Mode.NONE, drawButton, blurButton, textButton, stickerButton, cropButton, undoButton, saveButton);
+    setVisibleViewsWhenInMode(Mode.NONE, drawButton, blurButton, textButton, /*stickerButton,*/ cropButton, undoButton/*, saveButton*/);
 
     setVisibleViewsWhenInMode(Mode.DRAW, confirmButton, undoButton, colorPicker, colorPalette, highlightButton);
 
@@ -139,7 +139,7 @@ public final class ImageEditorHud extends LinearLayout {
       allViews.addAll(views);
     }
 
-    allViews.add(stickerButton);
+    //allViews.add(stickerButton);
     allViews.add(doneButton);
   }
 
@@ -171,20 +171,20 @@ public final class ImageEditorHud extends LinearLayout {
     blurButton.setOnClickListener(v -> setMode(Mode.BLUR));
     highlightButton.setOnClickListener(v -> setMode(Mode.HIGHLIGHT));
     textButton.setOnClickListener(v -> setMode(Mode.TEXT));
-    stickerButton.setOnClickListener(v -> setMode(Mode.INSERT_STICKER));
-    saveButton.setOnClickListener(v -> eventListener.onSave());
+    //stickerButton.setOnClickListener(v -> setMode(Mode.INSERT_STICKER));
+    //saveButton.setOnClickListener(v -> eventListener.onSave());
     doneButton.setOnClickListener(v -> eventListener.onDone());
     blurToggle.setOnCheckedChangeListener((button, enabled) -> eventListener.onBlurFacesToggled(enabled));
   }
 
   public void setUpForAvatarEditing() {
     visibilityModeMap.get(Mode.NONE).add(doneButton);
-    visibilityModeMap.get(Mode.NONE).remove(saveButton);
+    //visibilityModeMap.get(Mode.NONE).remove(saveButton);
     visibilityModeMap.get(Mode.CROP).remove(cropAspectLock);
 
     if (currentMode == Mode.NONE) {
       doneButton.setVisibility(View.VISIBLE);
-      saveButton.setVisibility(View.GONE);
+     // saveButton.setVisibility(View.GONE);
     } else if (currentMode == Mode.CROP) {
       cropAspectLock.setVisibility(View.GONE);
     }

@@ -22,10 +22,13 @@ import androidx.fragment.app.Fragment;
 
 import com.annimon.stream.Stream;
 import com.annimon.stream.function.Consumer;
-
+import com.example.poceditorviewsignal.LRUCache;
+import com.example.poceditorviewsignal.R;
+import com.example.poceditorviewsignal.ServiceUtil;
+/*
 import org.thoughtcrime.securesms.R;
 import org.thoughtcrime.securesms.util.LRUCache;
-import org.thoughtcrime.securesms.util.ServiceUtil;
+import org.thoughtcrime.securesms.util.ServiceUtil;*/
 
 import java.lang.ref.WeakReference;
 import java.security.SecureRandom;
@@ -156,12 +159,12 @@ public class Permissions {
 
     @SuppressWarnings("ConstantConditions")
     private void executePermissionsRequestWithRationale(PermissionsRequest request) {
-      RationaleDialog.createFor(permissionObject.getContext(), rationaleDialogMessage, rationalDialogHeader)
+    /*  RationaleDialog.createFor(permissionObject.getContext(), rationaleDialogMessage, rationalDialogHeader)
                      .setPositiveButton(R.string.Permissions_continue, (dialog, which) -> executePermissionsRequest(request))
                      .setNegativeButton(R.string.Permissions_not_now, (dialog, which) -> executeNoPermissionsRequest(request))
                      .show()
                      .getWindow()
-                     .setLayout((int)(permissionObject.getWindowWidth() * .75), ViewGroup.LayoutParams.WRAP_CONTENT);
+                     .setLayout((int)(permissionObject.getWindowWidth() * .75), ViewGroup.LayoutParams.WRAP_CONTENT);*/
     }
 
     private void executePermissionsRequest(PermissionsRequest request) {
@@ -346,14 +349,14 @@ public class Permissions {
     public void run() {
       Context context = this.context.get();
 
-      if (context != null) {
+     /* if (context != null) {
         new AlertDialog.Builder(context)
             .setTitle(R.string.Permissions_permission_required)
             .setMessage(message)
             .setPositiveButton(R.string.Permissions_continue, (dialog, which) -> context.startActivity(getApplicationSettingsIntent(context)))
             .setNegativeButton(android.R.string.cancel, null)
             .show();
-      }
+      }*/
     }
   }
 }

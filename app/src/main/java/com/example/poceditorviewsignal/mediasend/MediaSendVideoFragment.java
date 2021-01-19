@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,21 +15,29 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
-import org.signal.core.util.logging.Log;
+/*import org.signal.core.util.logging.Log;
 import org.thoughtcrime.securesms.R;
 import org.thoughtcrime.securesms.mms.MediaConstraints;
 import org.thoughtcrime.securesms.mms.VideoSlide;
 import org.thoughtcrime.securesms.scribbles.VideoEditorHud;
 import org.thoughtcrime.securesms.util.Throttler;
 import org.thoughtcrime.securesms.video.VideoBitRateCalculator;
-import org.thoughtcrime.securesms.video.VideoPlayer;
+import org.thoughtcrime.securesms.video.VideoPlayer;*/
+
+import com.example.poceditorviewsignal.MediaConstraints;
+import com.example.poceditorviewsignal.R;
+import com.example.poceditorviewsignal.Throttler;
+import com.example.poceditorviewsignal.VideoBitRateCalculator;
+import com.example.poceditorviewsignal.video.VideoPlayer;
+import com.example.poceditorviewsignal.video.VideoSlide;
+import com.example.poceditorviewsignal.views.VideoEditorHud;
 
 import java.io.IOException;
 
 public class MediaSendVideoFragment extends Fragment implements VideoEditorHud.EventListener,
                                                                 MediaSendPageFragment {
 
-  private static final String TAG = Log.tag(MediaSendVideoFragment.class);
+  private static final String TAG = "MediaSendVideoFragment.class";
 
   private static final String KEY_URI        = "uri";
   private static final String KEY_MAX_OUTPUT = "max_output_size";
@@ -40,7 +49,7 @@ public class MediaSendVideoFragment extends Fragment implements VideoEditorHud.E
             private Controller     controller;
             private Data           data           = new Data();
             private Uri            uri;
-            private VideoPlayer    player;
+            private VideoPlayer player;
   @Nullable private VideoEditorHud hud;
             private Runnable       updatePosition;
 
@@ -96,7 +105,6 @@ public class MediaSendVideoFragment extends Fragment implements VideoEditorHud.E
         hud.setVisibility(View.VISIBLE);
         startPositionUpdates();
       } catch (IOException e) {
-        Log.w(TAG, e);
       }
 
       player.setOnClickListener(v -> {
@@ -197,7 +205,6 @@ public class MediaSendVideoFragment extends Fragment implements VideoEditorHud.E
         updateHud(data);
       }
     } else {
-      Log.w(TAG, "Received a bad saved state. Received class: " + state.getClass().getName());
     }
   }
 

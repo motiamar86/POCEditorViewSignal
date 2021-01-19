@@ -1,3 +1,4 @@
+/*
 package com.example.poceditorviewsignal.mediasend;
 
 import android.os.Parcel;
@@ -16,9 +17,11 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+*/
 /**
  * A class that lets us nicely format data that we'll send back to {@link ConversationActivity}.
- */
+ *//*
+
 public class MediaSendActivityResult implements Parcelable {
   private final Collection<PreUploadResult> uploadResults;
   private final Collection<Media>           nonUploadedMedia;
@@ -126,3 +129,4 @@ public class MediaSendActivityResult implements Parcelable {
     ParcelUtil.writeParcelableCollection(dest, mentions);
   }
 }
+*/

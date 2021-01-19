@@ -3,7 +3,6 @@ package com.example.poceditorviewsignal.mms;
 import android.content.ContentUris;
 import android.net.Uri;
 
-import com.example.poceditorviewsignal.attachments.AttachmentId;
 
 
 public class PartUriParser {
@@ -14,9 +13,9 @@ public class PartUriParser {
     this.uri = uri;
   }
 
-  public AttachmentId getPartId() {
-    return /*new AttachmentId(getId(), getUniqueId())*/null;
-  }
+  /*public AttachmentId getPartId() {
+    return *//*new AttachmentId(getId(), getUniqueId())*//*null;
+  }*/
 
   private long getId() {
     return ContentUris.parseId(uri);

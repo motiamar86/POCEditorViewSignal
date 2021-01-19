@@ -7,14 +7,15 @@ import android.net.Uri;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.poceditorviewsignal.mms.PartUriParser;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DataSpec;
 import com.google.android.exoplayer2.upstream.TransferListener;
 
-import org.thoughtcrime.securesms.attachments.Attachment;
+/*import org.thoughtcrime.securesms.attachments.Attachment;
 import org.thoughtcrime.securesms.database.AttachmentDatabase;
 import org.thoughtcrime.securesms.database.DatabaseFactory;
-import org.thoughtcrime.securesms.mms.PartUriParser;
+import org.thoughtcrime.securesms.mms.PartUriParser;*/
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -44,12 +45,12 @@ public class PartDataSource implements DataSource {
   @Override
   public long open(DataSpec dataSpec) throws IOException {
     this.uri = dataSpec.uri;
-
+/*
     AttachmentDatabase attachmentDatabase = DatabaseFactory.getAttachmentDatabase(context);
-    PartUriParser      partUri            = new PartUriParser(uri);
-    Attachment         attachment         = attachmentDatabase.getAttachment(partUri.getPartId());
+    PartUriParser partUri            = new PartUriParser(uri);
+    Attachment         attachment         = attachmentDatabase.getAttachment(partUri.getPartId());*/
 
-    if (attachment == null) throw new IOException("Attachment not found");
+   /* if (attachment == null) throw new IOException("Attachment not found");
 
     this.inputSteam = attachmentDatabase.getAttachmentStream(partUri.getPartId(), dataSpec.position);
 
@@ -57,9 +58,9 @@ public class PartDataSource implements DataSource {
       listener.onTransferStart(this, dataSpec, false);
     }
 
-    if (attachment.getSize() - dataSpec.position <= 0) throw new EOFException("No more data");
+    if (attachment.getSize() - dataSpec.position <= 0) throw new EOFException("No more data");*/
 
-    return attachment.getSize() - dataSpec.position;
+    return /*attachment.getSize() - dataSpec.position*/0;
   }
 
   @Override

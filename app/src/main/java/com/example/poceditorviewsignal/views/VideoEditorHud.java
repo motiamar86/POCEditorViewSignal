@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.OpenableColumns;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
 import android.widget.LinearLayout;
@@ -23,13 +24,18 @@ import org.thoughtcrime.securesms.video.VideoBitRateCalculator;
 import org.thoughtcrime.securesms.video.VideoUtil;
 import org.thoughtcrime.securesms.video.videoconverter.VideoThumbnailsRangeSelectorView;*/
 
+import com.example.poceditorviewsignal.MediaUtil;
 import com.example.poceditorviewsignal.R;
 import com.example.poceditorviewsignal.VideoBitRateCalculator;
+import com.example.poceditorviewsignal.VideoUtil;
 import com.example.poceditorviewsignal.media.DecryptableUriMediaInput;
 import com.example.poceditorviewsignal.video.VideoSlide;
+import com.example.poceditorviewsignal.video.VideoThumbnailsRangeSelectorView;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * The HUD (heads-up display) that contains all of the tools for editing video.

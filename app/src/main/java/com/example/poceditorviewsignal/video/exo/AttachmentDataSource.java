@@ -3,13 +3,11 @@ package com.example.poceditorviewsignal.video.exo;
 
 import android.net.Uri;
 
+import com.example.poceditorviewsignal.providers.BlobProvider;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DataSpec;
 import com.google.android.exoplayer2.upstream.DefaultDataSource;
 import com.google.android.exoplayer2.upstream.TransferListener;
-
-import org.thoughtcrime.securesms.mms.PartAuthority;
-import org.thoughtcrime.securesms.providers.BlobProvider;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -40,7 +38,7 @@ public class AttachmentDataSource implements DataSource {
   @Override
   public long open(DataSpec dataSpec) throws IOException {
     if      (BlobProvider.isAuthority(dataSpec.uri)) dataSource = blobDataSource;
-    else if (PartAuthority.isLocalUri(dataSpec.uri)) dataSource = partDataSource;
+    /*else if (PartAuthority.isLocalUri(dataSpec.uri)) dataSource = partDataSource;*/
     else                                             dataSource = defaultDataSource;
 
     return dataSource.open(dataSpec);

@@ -21,7 +21,7 @@ import com.example.poceditorviewsignal.attachments.Attachment;
 
 import java.util.Objects;
 
-public abstract class MediaPreviewFragment extends Fragment {
+public abstract class MediaPreviewFragment extends Fragment  {
 
   static final String DATA_URI          = "DATA_URI";
   static final String DATA_SIZE         = "DATA_SIZE";
@@ -37,7 +37,6 @@ public abstract class MediaPreviewFragment extends Fragment {
 
   public static MediaPreviewFragment newInstance(@NonNull Uri dataUri, @NonNull String contentType, long size, boolean autoPlay) {
     Bundle args = new Bundle();
-
     args.putParcelable(MediaPreviewFragment.DATA_URI, dataUri);
     args.putString(MediaPreviewFragment.DATA_CONTENT_TYPE, contentType);
     args.putLong(MediaPreviewFragment.DATA_SIZE, size);

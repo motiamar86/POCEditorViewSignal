@@ -41,6 +41,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresPermission;
 
 import com.annimon.stream.Stream;
+import com.google.android.mms.pdu_alt.CharacterSets;
+import com.google.android.mms.pdu_alt.EncodedStringValue;
 /*import com.google.android.mms.pdu_alt.CharacterSets;
 import com.google.android.mms.pdu_alt.EncodedStringValue;
 import com.google.i18n.phonenumbers.NumberParseException;
@@ -162,9 +164,9 @@ public class Util {
     return value == null || value.length == 0;
   }
 
-  public static boolean isEmpty(ComposeText value) {
+ /* public static boolean isEmpty(ComposeText value) {
     return value == null || value.getText() == null || TextUtils.isEmpty(value.getTextTrimmed());
-  }
+  }*/
 
   public static boolean isEmpty(Collection<?> collection) {
     return collection == null || collection.isEmpty();
@@ -256,21 +258,6 @@ public class Util {
       android.Manifest.permission.READ_SMS,
       android.Manifest.permission.READ_PHONE_NUMBERS
   })
-  @SuppressLint("MissingPermission")
-  public static Optional<Phonenumber.PhoneNumber> getDeviceNumber(Context context) {
-    try {
-      final String           localNumber = ((TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE)).getLine1Number();
-      final Optional<String> countryIso  = getSimCountryIso(context);
-
-      if (TextUtils.isEmpty(localNumber)) return Optional.absent();
-      if (!countryIso.isPresent())        return Optional.absent();
-
-      return Optional.fromNullable(PhoneNumberUtil.getInstance().parse(localNumber, countryIso.get()));
-    } catch (NumberParseException e) {
-      Log.w(TAG, e);
-      return Optional.absent();
-    }
-  }
 
   public static Optional<String> getSimCountryIso(Context context) {
     String simCountryIso = ((TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE)).getSimCountryIso();
@@ -361,17 +348,8 @@ public class Util {
    * This code should be used in all places that compare app versions rather than
    * {@link #getManifestApkVersion(Context)} or {@link BuildConfig#VERSION_CODE}.
    */
-  public static int getCanonicalVersionCode() {
-    return BuildConfig.CANONICAL_VERSION_CODE;
-  }
 
-  /**
-   * {@link BuildConfig#VERSION_CODE} may not be the actual version due to ABI split code adding a
-   * postfix after BuildConfig is generated.
-   * <p>
-   * However, in most cases you want to use {@link BuildConfig#CANONICAL_VERSION_CODE} via
-   * {@link #getCanonicalVersionCode()}
-   */
+
   public static int getManifestApkVersion(Context context) {
     try {
       return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionCode;
@@ -380,10 +358,7 @@ public class Util {
     }
   }
 
-  public static String getSecret(int size) {
-    byte[] secret = getSecretBytes(size);
-    return Base64.encodeBytes(secret);
-  }
+
 
   public static byte[] getSecretBytes(int size) {
     return getSecretBytes(new SecureRandom(), size);
@@ -399,10 +374,10 @@ public class Util {
    * @return The amount of time (in ms) until this build of Signal will be considered 'expired'.
    *         Takes into account both the build age as well as any remote deprecation values.
    */
-  public static long getTimeUntilBuildExpiry() {
-    /*if (SignalStore.misc().isClientDeprecated()) {
+  /*public static long getTimeUntilBuildExpiry() {
+    *//*if (SignalStore.misc().isClientDeprecated()) {
       return 0;
-    }*/
+    }*//*
 
     long buildAge                   = System.currentTimeMillis() - BuildConfig.BUILD_TIMESTAMP;
     long timeUntilBuildDeprecation  = BUILD_LIFESPAN - buildAge;
@@ -414,12 +389,12 @@ public class Util {
     } else {
       return Math.max(timeUntilBuildDeprecation, 0);
     }
-  }
+  }*/
 
-  @TargetApi(VERSION_CODES.LOLLIPOP)
+/*  @TargetApi(VERSION_CODES.LOLLIPOP)
   public static boolean isMmsCapable(Context context) {
     return (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) || OutgoingLegacyMmsConnection.isConnectionPossible(context);
-  }
+  }*/
 
   public static boolean isMainThread() {
     return Looper.myLooper() == Looper.getMainLooper();
@@ -564,7 +539,7 @@ public class Util {
 
   private static Handler getHandler() {
     if (handler == null) {
-      synchronized (org.thoughtcrime.securesms.util.Util.class) {
+      synchronized (Util.class) {
         if (handler == null) {
           handler = new Handler(Looper.getMainLooper());
         }

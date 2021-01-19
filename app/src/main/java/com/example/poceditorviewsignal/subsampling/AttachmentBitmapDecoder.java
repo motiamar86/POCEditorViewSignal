@@ -8,8 +8,8 @@ import android.net.Uri;
 
 import com.davemorrissey.labs.subscaleview.decoder.ImageDecoder;
 import com.davemorrissey.labs.subscaleview.decoder.SkiaImageDecoder;
+import com.example.poceditorviewsignal.mms.PartAuthority;
 
-import org.thoughtcrime.securesms.mms.PartAuthority;
 
 import java.io.InputStream;
 
