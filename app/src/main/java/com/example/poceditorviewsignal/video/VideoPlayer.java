@@ -124,7 +124,7 @@ public class VideoPlayer extends FrameLayout {
     //TODO Pass the relevant Uri
     createMediaSource = () -> new ExtractorMediaSource.Factory(attachmentDataSourceFactory)
                                                       .setExtractorsFactory(extractorsFactory)
-                                                      .createMediaSource(Uri.parse("videoSource.getUri()"));
+                                                      .createMediaSource(videoSource.getUri());
 
     exoPlayer.prepare(createMediaSource.create());
     exoPlayer.setPlayWhenReady(autoplay);
